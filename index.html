@@ -1,292 +1,326 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-<meta charset="UTF-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<title>Thangamarikumar - Portfolio</title>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Thangamarikumar - Portfolio</title>
 
-<style>
-:root {
-  --bg:#f4f6f9;
-  --text:#222;
-  --card:#ffffff;
-  --accent:#0077ff;
-  --header:linear-gradient(135deg,#111,#1f1f1f);
-}
+    <style>
+        :root {
+            --bg: #f4f6f9;
+            --text: #222;
+            --card: #ffffff;
+            --accent: #0077ff;
+            --header: linear-gradient(135deg, #111, #1f1f1f);
+        }
 
-body.dark{
-  --bg:#0f172a;
-  --text:#f1f5f9;
-  --card:#1e293b;
-  --accent:#38bdf8;
-  --header:linear-gradient(135deg,#0f172a,#1e293b);
-}
+        body.dark {
+            --bg: #0f172a;
+            --text: #f1f5f9;
+            --card: #1e293b;
+            --accent: #38bdf8;
+            --header: linear-gradient(135deg, #0f172a, #1e293b);
+        }
 
-body{
-  margin:0;
-  font-family:'Segoe UI',sans-serif;
-  background:var(--bg);
-  color:var(--text);
-  transition:.3s;
-  line-height:1.7;
-}
+        body {
+            margin: 0;
+            font-family: 'Segoe UI', sans-serif;
+            background: var(--bg);
+            color: var(--text);
+            transition: .3s;
+            line-height: 1.7;
+        }
 
-header{
-  background:var(--header);
-  color:white;
-  padding:60px 20px;
-  text-align:center;
-  position:relative;
-}
+        header {
+            background: var(--header);
+            color: white;
+            padding: 60px 20px;
+            text-align: center;
+            position: relative;
+        }
 
-header h1{margin:0;font-size:40px;letter-spacing:.5px}
-header p{margin:6px 0;font-size:18px;opacity:.95}
+        header h1 {
+            margin: 0;
+            font-size: 40px;
+            letter-spacing: .5px
+        }
 
-.toggle-btn{
-  position:absolute;
-  right:20px;
-  top:20px;
-  background:var(--accent);
-  border:none;
-  color:white;
-  padding:8px 14px;
-  border-radius:20px;
-  cursor:pointer;
-}
+        header p {
+            margin: 6px 0;
+            font-size: 18px;
+            opacity: .95
+        }
 
-.resume-btn{
-  display:inline-block;
-  margin-top:18px;
-  padding:11px 22px;
-  background:var(--accent);
-  color:white;
-  border-radius:30px;
-  text-decoration:none;
-  font-weight:500;
-}
+        .toggle-btn {
+            position: absolute;
+            right: 20px;
+            top: 20px;
+            background: var(--accent);
+            border: none;
+            color: white;
+            padding: 8px 14px;
+            border-radius: 20px;
+            cursor: pointer;
+        }
 
-.container{max-width:1100px;margin:auto;padding:30px 20px}
+        .resume-btn {
+            display: inline-block;
+            margin-top: 18px;
+            padding: 11px 22px;
+            background: var(--accent);
+            color: white;
+            border-radius: 30px;
+            text-decoration: none;
+            font-weight: 500;
+        }
 
-.section{
-  margin-bottom:50px;
-  opacity:0;
-  transform:translateY(40px);
-  transition:.7s ease;
-}
+        .container {
+            max-width: 1100px;
+            margin: auto;
+            padding: 30px 20px
+        }
 
-.section.show{opacity:1;transform:translateY(0)}
+        .section {
+            margin-bottom: 50px;
+            opacity: 0;
+            transform: translateY(40px);
+            transition: .7s ease;
+        }
 
-h2{
-  margin-bottom:25px;
-  border-left:5px solid var(--accent);
-  padding-left:12px;
-  font-size:26px;
-}
+        .section.show {
+            opacity: 1;
+            transform: translateY(0)
+        }
 
-/* ---------- TIMELINE ---------- */
-.timeline{
-  position:relative;
-  margin-left:10px;
-  padding-left:30px;
-  border-left:3px solid var(--accent);
-}
+        h2 {
+            margin-bottom: 25px;
+            border-left: 5px solid var(--accent);
+            padding-left: 12px;
+            font-size: 26px;
+        }
 
-.timeline-item{
-  margin-bottom:35px;
-  position:relative;
-}
+        /* ---------- TIMELINE ---------- */
+        .timeline {
+            position: relative;
+            margin-left: 10px;
+            padding-left: 30px;
+            border-left: 3px solid var(--accent);
+        }
 
-.timeline-dot{
-  position:absolute;
-  left:-41px;
-  top:5px;
-  width:16px;
-  height:16px;
-  background:var(--accent);
-  border-radius:50%;
-}
+        .timeline-item {
+            margin-bottom: 35px;
+            position: relative;
+        }
 
-.timeline-card{
-  background:var(--card);
-  padding:20px 22px;
-  border-radius:12px;
-  box-shadow:0 6px 18px rgba(0,0,0,.08);
-}
+        .timeline-dot {
+            position: absolute;
+            left: -41px;
+            top: 5px;
+            width: 16px;
+            height: 16px;
+            background: var(--accent);
+            border-radius: 50%;
+        }
 
-.timeline-card h3{margin:0 0 5px 0}
-.timeline-card p{margin:6px 0}
+        .timeline-card {
+            background: var(--card);
+            padding: 20px 22px;
+            border-radius: 12px;
+            box-shadow: 0 6px 18px rgba(0, 0, 0, .08);
+        }
 
-/* ---------- PROJECT CARDS ---------- */
-.project-grid{
-  display:grid;
-  grid-template-columns:repeat(auto-fit,minmax(300px,1fr));
-  gap:25px;
-}
+        .timeline-card h3 {
+            margin: 0 0 5px 0
+        }
 
-.project-card{
-  background:var(--card);
-  padding:22px;
-  border-radius:16px;
-  box-shadow:0 8px 22px rgba(0,0,0,.08);
-  transition:.3s;
-}
+        .timeline-card p {
+            margin: 6px 0
+        }
 
-.project-card:hover{
-  transform:translateY(-6px) scale(1.01);
-}
+        /* ---------- PROJECT CARDS ---------- */
+        .project-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 25px;
+        }
 
-.project-card h3{margin-top:0}
-.tech{
-  margin-top:12px;
-  font-size:14px;
-  color:var(--accent);
-  font-weight:600;
-}
+        .project-card {
+            background: var(--card);
+            padding: 22px;
+            border-radius: 16px;
+            box-shadow: 0 8px 22px rgba(0, 0, 0, .08);
+            transition: .3s;
+        }
 
-ul{padding-left:18px;margin:10px 0}
-li{margin-bottom:6px}
+        .project-card:hover {
+            transform: translateY(-6px) scale(1.01);
+        }
 
-footer{
-  text-align:center;
-  padding:22px;
-  background:#111;
-  color:white;
-  margin-top:40px;
-}
-</style>
+        .project-card h3 {
+            margin-top: 0
+        }
+
+        .tech {
+            margin-top: 12px;
+            font-size: 14px;
+            color: var(--accent);
+            font-weight: 600;
+        }
+
+        ul {
+            padding-left: 18px;
+            margin: 10px 0
+        }
+
+        li {
+            margin-bottom: 6px
+        }
+
+        footer {
+            text-align: center;
+            padding: 22px;
+            background: #111;
+            color: white;
+            margin-top: 40px;
+        }
+    </style>
 </head>
 
 <body>
 
-<header>
-<button class="toggle-btn" onclick="toggleTheme()">🌙</button>
-<h1>Thangamarikumar</h1>
-<p>Software Developer | Java | Spring Boot | JavaScript | MySQL</p>
-<p>📞 +91 9750903957 | 📧 thangamarikumark@gmail.com</p>
-<a href="resume.pdf" download class="resume-btn">📄 Download Resume</a>
-</header>
+    <header>
+        <button class="toggle-btn" onclick="toggleTheme()">🌙</button>
+        <h1>Thangamarikumar</h1>
+        <p>Software Developer | Java | Spring Boot | JavaScript | MySQL</p>
+        <p>📞 +91 9750903957 | 📧 thangamarikumark@gmail.com</p>
+        <a href="Thangamarikumar_Profile.pdf" download class="resume-btn">📄 Download Resume</a>
+    </header>
 
-<div class="container">
+    <div class="container">
 
-<!-- ABOUT -->
-<div class="section">
-<h2>About Me</h2>
-<p>
-Software Developer with 3+ years of experience specializing in Java, Spring Boot, MySQL and JavaScript.
-Experienced in building scalable WhatsApp chatbot systems, RESTful APIs and backend automation platforms.
-Strong expertise in database optimization, third-party integrations and payment gateway implementations.
-</p>
-</div>
+        <!-- ABOUT -->
+        <div class="section">
+            <h2>About Me</h2>
+            <p>
+                Software Developer with 3+ years of experience specializing in Java, Spring Boot, MySQL and JavaScript.
+                Experienced in building scalable WhatsApp chatbot systems, RESTful APIs and backend automation
+                platforms.
+                Strong expertise in database optimization, third-party integrations and payment gateway implementations.
+            </p>
+        </div>
 
-<!-- EXPERIENCE TIMELINE -->
-<div class="section">
-<h2>Experience</h2>
+        <!-- EXPERIENCE TIMELINE -->
+        <div class="section">
+            <h2>Experience</h2>
 
-<div class="timeline">
+            <div class="timeline">
 
-<div class="timeline-item">
-<div class="timeline-dot"></div>
-<div class="timeline-card">
-<h3>Software Developer – Inswit Software Private Limited, Chennai</h3>
-<p><strong>Apr 2022 – Present</strong></p>
-<p>Software development company focused on innovative automation solutions.</p>
-<ul>
-<li>Designed and developed scalable WhatsApp chatbot applications using JavaScript, Java, Spring Boot and MySQL.</li>
-<li>Built and integrated RESTful APIs with third-party systems.</li>
-<li>Managed MySQL schema design, indexing and query optimization.</li>
-<li>Automated business workflows improving operational efficiency.</li>
-</ul>
-</div>
-</div>
+                <div class="timeline-item">
+                    <div class="timeline-dot"></div>
+                    <div class="timeline-card">
+                        <h3>Software Developer – Inswit Software Private Limited, Chennai</h3>
+                        <p><strong>Apr 2022 – Present</strong></p>
+                        <p>Software development company focused on innovative automation solutions.</p>
+                        <ul>
+                            <li>Designed and developed scalable WhatsApp chatbot applications using JavaScript, Java,
+                                Spring Boot and MySQL.</li>
+                            <li>Built and integrated RESTful APIs with third-party systems.</li>
+                            <li>Managed MySQL schema design, indexing and query optimization.</li>
+                            <li>Automated business workflows improving operational efficiency.</li>
+                        </ul>
+                    </div>
+                </div>
 
-<div class="timeline-item">
-<div class="timeline-dot"></div>
-<div class="timeline-card">
-<h3>SAP Trainee – Neel Industries Pvt Ltd (JBM Group), Chennai</h3>
-<p><strong>Apr 2021 – Feb 2022</strong></p>
-<p>Industrial product manufacturing and solutions company.</p>
-<ul>
-<li>Worked on SAP billing and stock management modules.</li>
-<li>Managed stock entries and inventory adjustments.</li>
-<li>Prepared technical billing documentation.</li>
-</ul>
-</div>
-</div>
+                <div class="timeline-item">
+                    <div class="timeline-dot"></div>
+                    <div class="timeline-card">
+                        <h3>SAP Trainee – Neel Industries Pvt Ltd (JBM Group), Chennai</h3>
+                        <p><strong>Apr 2021 – Feb 2022</strong></p>
+                        <p>Industrial product manufacturing and solutions company.</p>
+                        <ul>
+                            <li>Worked on SAP billing and stock management modules.</li>
+                            <li>Managed stock entries and inventory adjustments.</li>
+                            <li>Prepared technical billing documentation.</li>
+                        </ul>
+                    </div>
+                </div>
 
-</div>
-</div>
+            </div>
+        </div>
 
-<!-- PROJECT CARDS -->
-<div class="section">
-<h2>Projects</h2>
+        <!-- PROJECT CARDS -->
+        <div class="section">
+            <h2>Projects</h2>
 
-<div class="project-grid">
+            <div class="project-grid">
 
-<div class="project-card">
-<h3>WhatsApp Ticket Booking (CMRL)</h3>
-<p>A WhatsApp-based ticket booking system designed to enhance customer experience.</p>
-<ul>
-<li>Developed scalable chatbot applications.</li>
-<li>Built Spring Boot REST APIs.</li>
-<li>Optimized MySQL performance.</li>
-<li>Automated operational workflows.</li>
-</ul>
-<div class="tech">JavaScript • Java • MySQL • REST APIs</div>
-</div>
+                <div class="project-card">
+                    <h3>WhatsApp Ticket Booking (CMRL)</h3>
+                    <p>A WhatsApp-based ticket booking system designed to enhance customer experience.</p>
+                    <ul>
+                        <li>Developed scalable chatbot applications.</li>
+                        <li>Built Spring Boot REST APIs.</li>
+                        <li>Optimized MySQL performance.</li>
+                        <li>Automated operational workflows.</li>
+                    </ul>
+                    <div class="tech">JavaScript • Java • MySQL • REST APIs</div>
+                </div>
 
-<div class="project-card">
-<h3>Bank of India WhatsApp Chatbot</h3>
-<p>Secure banking chatbot enabling digital services through WhatsApp.</p>
-<ul>
-<li>Implemented OTP verification workflows.</li>
-<li>Integrated backend banking APIs.</li>
-<li>Enabled balance & statement services.</li>
-</ul>
-<div class="tech">JavaScript • Oracle SQL • APIs</div>
-</div>
+                <div class="project-card">
+                    <h3>Bank of India WhatsApp Chatbot</h3>
+                    <p>Secure banking chatbot enabling digital services through WhatsApp.</p>
+                    <ul>
+                        <li>Implemented OTP verification workflows.</li>
+                        <li>Integrated backend banking APIs.</li>
+                        <li>Enabled balance & statement services.</li>
+                    </ul>
+                    <div class="tech">JavaScript • Oracle SQL • APIs</div>
+                </div>
 
-<div class="project-card">
-<h3>TNeGA Digital Services Platform</h3>
-<p>State-wide government WhatsApp digital services platform.</p>
-<ul>
-<li>Led backend API architecture.</li>
-<li>Built AI-assisted automation.</li>
-<li>Integrated SurePay payments.</li>
-<li>Handled reconciliation & tracking.</li>
-</ul>
-<div class="tech">Java • Spring Boot • MySQL • REST APIs</div>
-</div>
+                <div class="project-card">
+                    <h3>TNeGA Digital Services Platform</h3>
+                    <p>State-wide government WhatsApp digital services platform.</p>
+                    <ul>
+                        <li>Led backend API architecture.</li>
+                        <li>Built AI-assisted automation.</li>
+                        <li>Integrated SurePay payments.</li>
+                        <li>Handled reconciliation & tracking.</li>
+                    </ul>
+                    <div class="tech">Java • Spring Boot • MySQL • REST APIs</div>
+                </div>
 
-</div>
-</div>
+            </div>
+        </div>
 
-<!-- EDUCATION -->
-<div class="section">
-<h2>Education</h2>
-<p>
-<strong>B.E. Electrical and Electronics Engineering</strong><br>
-New Prince Shri Bhavani College of Engineering and Technology – Chennai<br>
-CGPA: 7.8 | 2017 – 2021
-</p>
-</div>
+        <!-- EDUCATION -->
+        <div class="section">
+            <h2>Education</h2>
+            <p>
+                <strong>B.E. Electrical and Electronics Engineering</strong><br>
+                New Prince Shri Bhavani College of Engineering and Technology – Chennai<br>
+                CGPA: 7.8 | 2017 – 2021
+            </p>
+        </div>
 
-</div>
+    </div>
 
-<footer>© 2026 Thangamarikumar</footer>
+    <footer>© 2026 Thangamarikumar</footer>
 
-<script>
-function toggleTheme(){
- document.body.classList.toggle('dark');
-}
+    <script>
+        function toggleTheme() {
+            document.body.classList.toggle('dark');
+        }
 
-const sections=document.querySelectorAll('.section');
-const observer=new IntersectionObserver(entries=>{
- entries.forEach(e=>{
-  if(e.isIntersecting){e.target.classList.add('show');}
- });
-},{threshold:.2});
-sections.forEach(s=>observer.observe(s));
-</script>
+        const sections = document.querySelectorAll('.section');
+        const observer = new IntersectionObserver(entries => {
+            entries.forEach(e => {
+                if (e.isIntersecting) { e.target.classList.add('show'); }
+            });
+        }, { threshold: .2 });
+        sections.forEach(s => observer.observe(s));
+    </script>
 
 </body>
+
 </html>
