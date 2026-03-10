@@ -1,0 +1,396 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Happy Birthday 🎂</title>
+  <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@700&family=Lato:wght@300;400&display=swap" rel="stylesheet"/>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root {
+      --rose: #ff3d7f;
+      --blush: #ffe0ec;
+      --deep: #3d0026;
+    }
+    body {
+      min-height: 100vh;
+      background: radial-gradient(ellipse at 20% 50%, #ffe0ec 0%, #ffc2d4 40%, #ffabc6 100%);
+      font-family: 'Lato', sans-serif;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      overflow-x: hidden;
+      position: relative;
+    }
+    .hearts-bg {
+      position: fixed; top: 0; left: 0;
+      width: 100%; height: 100%;
+      pointer-events: none; z-index: 0; overflow: hidden;
+    }
+    .heart-float {
+      position: absolute; bottom: -60px; opacity: 0;
+      animation: floatUp linear infinite;
+    }
+    @keyframes floatUp {
+      0%   { opacity: 0; transform: translateY(0) rotate(0deg); }
+      10%  { opacity: 0.7; }
+      90%  { opacity: 0.5; }
+      100% { opacity: 0; transform: translateY(-110vh) rotate(360deg); }
+    }
+    .container {
+      position: relative; z-index: 1;
+      text-align: center; padding: 40px 30px;
+      max-width: 620px; width: 95%;
+    }
+    .cake {
+      font-size: 5rem; display: inline-block;
+      animation: cakeBounce 1.2s ease-in-out infinite alternate;
+      filter: drop-shadow(0 8px 18px rgba(255,61,127,0.4));
+    }
+    @keyframes cakeBounce {
+      0%   { transform: translateY(0) scale(1); }
+      100% { transform: translateY(-14px) scale(1.08); }
+    }
+    h1 {
+      font-family: 'Dancing Script', cursive;
+      font-size: clamp(2.4rem, 7vw, 4rem);
+      color: var(--rose);
+      text-shadow: 2px 4px 12px rgba(255,61,127,0.25);
+      margin: 18px 0 8px;
+      animation: fadeSlideDown 0.9s ease both;
+    }
+    .subtitle {
+      font-size: 1.05rem; color: #a0004a;
+      letter-spacing: 0.06em; font-weight: 300;
+      margin-bottom: 26px;
+      animation: fadeSlideDown 1.1s 0.2s ease both;
+    }
+    .message-card {
+      background: rgba(255,255,255,0.65);
+      backdrop-filter: blur(10px);
+      border: 1.5px solid rgba(255,107,157,0.3);
+      border-radius: 24px; padding: 28px 32px; margin-bottom: 32px;
+      box-shadow: 0 12px 40px rgba(255,61,127,0.15), 0 2px 8px rgba(0,0,0,0.06);
+      animation: fadeSlideDown 1.2s 0.3s ease both;
+    }
+    .message-card p { font-size: 1.08rem; line-height: 1.8; color: var(--deep); }
+    .message-card .highlight {
+      color: var(--rose); font-weight: 700;
+      font-family: 'Dancing Script', cursive; font-size: 1.3rem;
+    }
+    .marry-section { animation: fadeSlideDown 1.3s 0.5s ease both; }
+    .marry-question {
+      font-family: 'Dancing Script', cursive;
+      font-size: clamp(1.8rem, 5vw, 2.6rem);
+      color: var(--deep); margin-bottom: 24px;
+    }
+    .marry-question span { color: var(--rose); }
+    .btn-group { display: flex; gap: 20px; justify-content: center; flex-wrap: wrap; }
+    .btn {
+      padding: 14px 44px; border: none; border-radius: 50px;
+      font-size: 1.15rem; font-family: 'Lato', sans-serif;
+      font-weight: 700; cursor: pointer;
+      transition: transform 0.15s, box-shadow 0.15s;
+      letter-spacing: 0.04em;
+    }
+    .btn-yes {
+      background: linear-gradient(135deg, var(--rose), #ff8fb3);
+      color: white; box-shadow: 0 6px 22px rgba(255,61,127,0.45);
+    }
+    .btn-yes:hover { transform: translateY(-3px) scale(1.06); box-shadow: 0 10px 30px rgba(255,61,127,0.5); }
+    .btn-yes:active { transform: scale(0.97); }
+    .btn-no {
+      background: white; color: var(--rose);
+      border: 2px solid var(--rose);
+      box-shadow: 0 4px 14px rgba(255,107,157,0.2);
+      transition: all 0.2s;
+    }
+    .btn-no:hover { background: var(--blush); }
+
+    /* panels */
+    .response-panel { display: none; margin-top: 30px; }
+    .response-panel.show { display: block; }
+
+    /* YES panel */
+    .yes-panel { animation: popIn 0.5s cubic-bezier(0.34,1.56,0.64,1) both; }
+    .yes-panel .emoji-burst {
+      font-size: 3.5rem; display: flex;
+      justify-content: center; gap: 10px; flex-wrap: wrap; margin-bottom: 16px;
+    }
+    .yes-panel .emoji-burst span {
+      display: inline-block;
+      animation: emojiDance 0.6s ease infinite alternate;
+    }
+    .yes-panel .emoji-burst span:nth-child(1){ animation-delay:0.0s; }
+    .yes-panel .emoji-burst span:nth-child(2){ animation-delay:0.1s; }
+    .yes-panel .emoji-burst span:nth-child(3){ animation-delay:0.2s; }
+    .yes-panel .emoji-burst span:nth-child(4){ animation-delay:0.3s; }
+    .yes-panel .emoji-burst span:nth-child(5){ animation-delay:0.4s; }
+    .yes-panel .emoji-burst span:nth-child(6){ animation-delay:0.5s; }
+    .yes-panel .emoji-burst span:nth-child(7){ animation-delay:0.6s; }
+    @keyframes emojiDance {
+      0%   { transform: translateY(0) rotate(-8deg) scale(1); }
+      100% { transform: translateY(-16px) rotate(8deg) scale(1.18); }
+    }
+    .yes-msg {
+      font-family: 'Dancing Script', cursive; font-size: 2rem;
+      color: var(--rose); text-shadow: 1px 2px 8px rgba(255,61,127,0.3);
+    }
+    .yes-sub { font-size: 1rem; color: #a0004a; margin-top: 8px; font-weight: 300; }
+    .ring-sparkle {
+      font-size: 2.8rem; display: inline-block;
+      animation: sparkleRing 1s ease-in-out infinite alternate;
+    }
+    @keyframes sparkleRing {
+      0%   { transform: rotate(-10deg) scale(1); filter: drop-shadow(0 0 6px gold); }
+      100% { transform: rotate(10deg) scale(1.15); filter: drop-shadow(0 0 18px gold); }
+    }
+
+    /* NO panel */
+    .no-panel {
+      background: rgba(255,255,255,0.7);
+      backdrop-filter: blur(10px); border-radius: 20px;
+      padding: 26px 28px;
+      border: 1.5px solid rgba(255,107,157,0.25);
+      box-shadow: 0 8px 30px rgba(255,61,127,0.12);
+    }
+    .no-counter {
+      display: inline-block; background: var(--rose); color: white;
+      font-size: 0.78rem; font-weight: 700; border-radius: 50px;
+      padding: 3px 14px; margin-bottom: 14px; letter-spacing: 0.07em;
+      animation: pulseBadge 1.1s ease infinite alternate;
+    }
+    @keyframes pulseBadge {
+      0%   { transform: scale(1); box-shadow: 0 0 0 rgba(255,61,127,0); }
+      100% { transform: scale(1.07); box-shadow: 0 0 12px rgba(255,61,127,0.55); }
+    }
+    .quote-icon {
+      font-size: 3rem; line-height: 1; color: var(--rose);
+      opacity: 0.35; font-family: Georgia, serif;
+    }
+    .quote-text {
+      font-size: 1.1rem; color: var(--deep);
+      line-height: 1.85; font-style: italic; margin: 10px 0 14px;
+    }
+    .quote-author {
+      font-size: 0.9rem; color: #c0005a;
+      font-weight: 700; letter-spacing: 0.08em;
+      text-transform: uppercase; margin-bottom: 6px;
+    }
+    .no-hint {
+      font-size: 0.83rem; color: #d0006a;
+      margin-top: 12px; opacity: 0.8; font-style: italic;
+    }
+
+    /* shake on NO btn */
+    @keyframes shake {
+      0%,100% { transform: translateX(0) rotate(0); }
+      20%      { transform: translateX(-9px) rotate(-4deg); }
+      40%      { transform: translateX(9px) rotate(4deg); }
+      60%      { transform: translateX(-6px) rotate(-2deg); }
+      80%      { transform: translateX(6px) rotate(2deg); }
+    }
+    .shake { animation: shake 0.5s ease; }
+
+    /* quote swap */
+    @keyframes quoteIn {
+      0%   { opacity: 0; transform: translateY(14px); }
+      100% { opacity: 1; transform: translateY(0); }
+    }
+    .quote-in { animation: quoteIn 0.4s ease both; }
+
+    @keyframes popIn {
+      0%   { transform: scale(0.5); opacity: 0; }
+      100% { transform: scale(1); opacity: 1; }
+    }
+    @keyframes fadeSlideDown {
+      0%   { opacity: 0; transform: translateY(-20px); }
+      100% { opacity: 1; transform: translateY(0); }
+    }
+    #confetti-canvas {
+      position: fixed; top: 0; left: 0;
+      width: 100%; height: 100%;
+      pointer-events: none; z-index: 99;
+    }
+  </style>
+</head>
+<body>
+
+<canvas id="confetti-canvas"></canvas>
+<div class="hearts-bg" id="heartsContainer"></div>
+
+<div class="container">
+  <div class="cake">🎂</div>
+  <h1>Advance Happy Birthday, Mathi! 🌹</h1>
+  <p class="subtitle">Today the whole universe celebrates YOU ✨</p>
+
+  <div class="message-card">
+    <p>
+      On this beautiful day, I just want you to know —
+      <br/>you are <span class="highlight">my favourite person</span> in the entire world.
+      <br/><br/>
+      Every moment with you feels like a dream I never want to wake up from.
+      You make my ordinary days feel like <span class="highlight">magic</span>. 🌸
+      <br/><br/>
+      So on your special day, I have the most important question in the world for you... 💍
+    </p>
+  </div>
+
+  <!-- First question — hides after first NO -->
+  <div class="marry-section" id="mainSection">
+    <p class="marry-question">Will you <span>marry me</span>? 💍</p>
+    <div class="btn-group">
+      <button class="btn btn-yes" onclick="handleYes()">Yes! 💖</button>
+      <button class="btn btn-no" id="noBtn" onclick="handleNo()">No 😢</button>
+    </div>
+  </div>
+
+  <!-- YES panel -->
+  <div class="response-panel yes-panel" id="yesPanel">
+    <div class="emoji-burst">
+      <span>💃</span><span>🎉</span><span>💍</span><span>💖</span><span>🥂</span><span>🌈</span><span>✨</span>
+    </div>
+    <div class="ring-sparkle">💍</div>
+    <p class="yes-msg">She said YES!!! 🎊</p>
+    <p class="yes-sub">You just made me the happiest person alive. I love you to infinity & beyond! 🌙⭐</p>
+  </div>
+
+  <!-- NO panel — stays shown, only YES exits -->
+  <div class="response-panel no-panel" id="noPanel">
+    <span class="no-counter" id="noCounter">Attempt #1</span>
+    <div class="quote-icon">"</div>
+    <p class="quote-text" id="quoteText"></p>
+    <p class="quote-author" id="quoteAuthor"></p>
+    <div class="btn-group" style="margin-top:20px;">
+      <button class="btn btn-yes" onclick="handleYes()">Okay fine… YES! 💖</button>
+      <button class="btn btn-no" id="noBtn2" onclick="handleNo()">Still No 😤</button>
+    </div>
+    <p class="no-hint" id="noHint">Go ahead, keep saying no. I have unlimited love & quotes. 💌</p>
+  </div>
+</div>
+
+<script>
+  // Floating hearts
+  const emojis = ['💗','💓','💕','🌸','💝','💞','🌹','💖'];
+  const hc = document.getElementById('heartsContainer');
+  for (let i = 0; i < 24; i++) {
+    const el = document.createElement('div');
+    el.className = 'heart-float';
+    el.textContent = emojis[Math.floor(Math.random() * emojis.length)];
+    el.style.left = Math.random() * 100 + 'vw';
+    el.style.fontSize = (1 + Math.random() * 1.5) + 'rem';
+    el.style.animationDuration = (6 + Math.random() * 8) + 's';
+    el.style.animationDelay = (Math.random() * 8) + 's';
+    hc.appendChild(el);
+  }
+
+  const quotes = [
+    { text: "I have waited for you my whole life. I can wait a little longer — because some things are worth every second.", author: "— My Heart, Always" },
+    { text: "You are the poem I never knew how to write. The song I hum even when I forget the words. Say yes?", author: "— The Guy Who Loves You Most" },
+    { text: "Every 'no' from you only makes my 'yes' louder. I'm not going anywhere, darling.", author: "— Your Stubborn Admirer 💌" },
+    { text: "Distance means nothing when someone means everything. And you? You mean absolutely everything to me.", author: "— A Hopeless Romantic" },
+    { text: "I would rather spend a lifetime chasing your smile than live a comfortable life without it.", author: "— The One Who Chose You" },
+    { text: "Even if you say no a thousand times, I'll love you a thousand and one. That's just how this works. 🌹", author: "— Me, Unapologetically" },
+    { text: "You walked into my life and rearranged every single thing — and I wouldn't have it any other way.", author: "— Someone Completely Gone for You" },
+    { text: "I don't need stars in the sky when you light up every room you walk into.", author: "— Your Biggest Fan 🌟" },
+    { text: "You are not just the love of my life — you are the reason I finally understand what life is for.", author: "— The One Who'll Never Give Up" },
+    { text: "Fine. I'll ask again tomorrow. And the day after. Until forever sounds less scary than a life without you.", author: "— Eternally Yours 💍" },
+    { text: "My love for you is not a feeling that comes and goes — it's the ground I stand on.", author: "— Standing Firm, For You 🌺" },
+    { text: "I have so much love for you, it's honestly embarrassing. But I'd rather be embarrassed in love than empty without you.", author: "— Hopelessly, Helplessly Yours" },
+  ];
+
+  const hints = [
+    "Go ahead, keep saying no. I have unlimited love & quotes. 💌",
+    "Wrong answer… try again? 🥺",
+    "Still here. Still in love. Still waiting. 🌹",
+    "Each 'no' just gives me another reason to try harder. 💪💖",
+    "You can't scare me away. I'm too in love for that. 😤❤️",
+    "Is that a… hesitation? I see it. Almost there! 👀",
+    "I've been practicing this for a while. I can go all day. 😏💕",
+    "Your heart knows the answer. Just listen to it. 🫀",
+    "The correct answer rhymes with 'chess'. 🎯",
+    "Okay but IMAGINE how great the wedding would be though… 👀🎊",
+    "This is attempt #${n}. I have infinite more. 😇",
+    "Still smiling. Still in love. Still asking. 💍",
+  ];
+
+  let noCount = 0;
+
+  function handleNo() {
+    // Shake the NO button that was just pressed
+    const btn = noCount === 0 ? document.getElementById('noBtn') : document.getElementById('noBtn2');
+    if (btn) {
+      btn.classList.remove('shake');
+      void btn.offsetWidth; // reflow to restart animation
+      btn.classList.add('shake');
+      setTimeout(() => btn.classList.remove('shake'), 600);
+    }
+
+    const q = quotes[noCount % quotes.length];
+    noCount++;
+    const hint = hints[(noCount - 1) % hints.length].replace('${n}', noCount);
+
+    document.getElementById('noCounter').textContent = `Attempt #${noCount}`;
+
+    const qText = document.getElementById('quoteText');
+    qText.classList.remove('quote-in');
+    void qText.offsetWidth;
+    qText.textContent = q.text;
+    qText.classList.add('quote-in');
+
+    document.getElementById('quoteAuthor').textContent = q.author;
+    document.getElementById('noHint').textContent = hint;
+
+    document.getElementById('mainSection').style.display = 'none';
+    document.getElementById('yesPanel').classList.remove('show');
+    document.getElementById('noPanel').classList.add('show');
+  }
+
+  function handleYes() {
+    document.getElementById('mainSection').style.display = 'none';
+    document.getElementById('noPanel').classList.remove('show');
+    document.getElementById('yesPanel').classList.add('show');
+    launchConfetti();
+  }
+
+  function launchConfetti() {
+    const canvas = document.getElementById('confetti-canvas');
+    const ctx = canvas.getContext('2d');
+    canvas.width = window.innerWidth;
+    canvas.height = window.innerHeight;
+    const colors = ['#ff6b9d','#ff3d7f','#ffd700','#fff','#ff8fb3','#ff1493','#ff69b4','#ffb6c1'];
+    const pieces = Array.from({ length: 200 }, () => ({
+      x: Math.random() * canvas.width,
+      y: Math.random() * -canvas.height,
+      r: 4 + Math.random() * 8,
+      color: colors[Math.floor(Math.random() * colors.length)],
+      vx: (Math.random() - 0.5) * 3,
+      vy: 2 + Math.random() * 4,
+      angle: Math.random() * 360,
+      spin: (Math.random() - 0.5) * 6,
+      shape: Math.random() > 0.5 ? 'rect' : 'circle',
+    }));
+    let frame = 0;
+    function draw() {
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
+      pieces.forEach(p => {
+        ctx.save();
+        ctx.translate(p.x, p.y);
+        ctx.rotate((p.angle * Math.PI) / 180);
+        ctx.fillStyle = p.color;
+        if (p.shape === 'rect') ctx.fillRect(-p.r / 2, -p.r / 2, p.r, p.r * 1.6);
+        else { ctx.beginPath(); ctx.arc(0, 0, p.r / 2, 0, Math.PI * 2); ctx.fill(); }
+        ctx.restore();
+        p.x += p.vx; p.y += p.vy; p.angle += p.spin;
+        if (p.y > canvas.height + 20) { p.y = -20; p.x = Math.random() * canvas.width; }
+      });
+      frame++;
+      if (frame < 350) requestAnimationFrame(draw);
+      else ctx.clearRect(0, 0, canvas.width, canvas.height);
+    }
+    draw();
+  }
+</script>
+</body>
+</html>
